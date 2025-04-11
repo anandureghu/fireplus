@@ -7,13 +7,20 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs.js",
-      "import": "./dist/index.esm.js"
+      "import": "./dist/index.esm.js",
+      "default": "./dist/index.cjs.js"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup index.ts --dts --format esm,cjs --clean",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "npm run build"
   },
   "author": "anandureghu <dev.anandureghu@gmail.com>",
   "license": "ISC",

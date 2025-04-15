@@ -26,20 +26,6 @@ import FirePlus from "../Fireplus";
  */
 export function Schema() {
   return function <T extends new (...args: any[]) => any>(target: T) {
-    // Initialize FirePlus globally if not already initialized
-    // We need to provide an empty config object to satisfy the type requirements
-    const emptyConfig = {
-      apiKey: "",
-      authDomain: "",
-      projectId: "",
-      storageBucket: "",
-      messagingSenderId: "",
-      appId: "",
-    };
-
-    // Initialize FirePlus with empty config if not already initialized
-    FirePlus.init(emptyConfig);
-
     // Get the prototype of the target class
     const prototype = target.prototype;
 

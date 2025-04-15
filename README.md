@@ -40,20 +40,12 @@ FirePlus.init({
 
 ```typescript
 import { Schema } from "fireplus";
-import FirePlus from "fireplus";
 
 @Schema()
-class User extends FirePlus {
+class User {
   name: string;
   email: string;
   age?: number;
-
-  constructor(data: Partial<User>) {
-    super();
-    this.name = data.name || "";
-    this.email = data.email || "";
-    this.age = data.age;
-  }
 }
 ```
 
@@ -83,76 +75,70 @@ await user.delete();
 
 #### @Schema()
 
-Marks a class as a Firestore model. The class must extend `FirePlus`.
+Marks a class as a Firestore model. The decorator automatically extends the class with FirePlus functionality.
 
 ```typescript
 @Schema()
-class MyModel extends FirePlus {
-  // ...
+class MyModel {
+  // Define your properties here
+  name: string;
+  email: string;
 }
 ```
 
 ### FirePlus Class
 
-Base class for all Firestore models. Provides CRUD operations and utility methods.
-
-#### Constructor
-
-```typescript
-constructor(config?: FirebaseOptions | FirebaseApp)
-```
-
-Initializes a new FirePlus instance with optional Firebase configuration.
+Base class that provides CRUD operations and utility methods. Automatically applied by the `@Schema` decorator.
 
 #### Static Methods
 
-##### init(config?: FirebaseOptions | FirebaseApp): FirePlus
+##### `init(config?: FirebaseOptions | FirebaseApp): FirePlus`
 
 Initializes the FirePlus singleton with Firebase configuration.
 
-##### findById(id: string): Promise<T | null>
+##### `findById(id: string): Promise<T | null>`
 
 Finds a document by ID.
 
-##### findAll(): Promise<T[]>
+##### `findAll(): Promise<T[]>`
 
 Retrieves all documents in the collection.
 
-##### findByField(field: string, value: any): Promise<T[]>
+##### `findByField(field: string, value: any): Promise<T[]>`
 
 Finds documents by a specific field value.
 
-##### findWhere(constraints: QueryConstraint[]): Promise<T[]>
+##### `findWhere(constraints: QueryConstraint[]): Promise<T[]>`
 
 Finds documents using Firestore query constraints.
 
-##### findOne(constraints: QueryConstraint[]): Promise<T | null>
+##### `findOne(constraints: QueryConstraint[]): Promise<T | null>`
 
 Finds the first document matching the query constraints.
 
-##### findOneByField(field: string, value: any): Promise<T | null>
+##### `findOneByField(field: string, value: any): Promise<T | null>`
 
 Finds the first document matching a specific field value.
 
 #### Instance Methods
 
-##### save(): Promise<string | null>
+##### `save(): Promise<string | null>`
 
 Saves the current document to Firestore.
 
-##### update(): Promise<boolean>
+##### `update(): Promise<boolean>`
 
 Updates the current document in Firestore.
 
-##### delete(): Promise<boolean>
+##### `delete(): Promise<boolean>`
 
 Deletes the current document from Firestore.
 
-##### getCollectionName(): string
+##### `getCollectionName(): string`
 
 Gets the collection name for the current model.
 
-##### getPrimitiveProps(): DocumentData
+##### `getPrimitiveProps(): DocumentData`
 
 Gets all primitive properties of the current instance.
 
@@ -198,19 +184,11 @@ const todo = await Todo.findOneByField("title", "Buy groceries");
 
 ```typescript
 @Schema()
-class Product extends FirePlus {
+class Product {
   name: string;
   price: number;
   category: string;
   inStock: boolean;
-
-  constructor(data: Partial<Product>) {
-    super();
-    this.name = data.name || "";
-    this.price = data.price || 0;
-    this.category = data.category || "";
-    this.inStock = data.inStock || false;
-  }
 
   // Custom methods
   async markAsOutOfStock() {

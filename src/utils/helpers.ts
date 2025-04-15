@@ -1,13 +1,18 @@
 // Type helpers, Firestore converters
 
 /**
- * Pluralizes a string by adding 's' if it doesn't end with 's'
+ * Pluralizes a string by adding 's' or 'ies' based on the word ending.
+ * Used internally to generate collection names from model class names.
+ *
  * @param str - The string to pluralize
  * @returns The pluralized string
  * @example
- * pluralize('user') // returns 'users'
- * pluralize('users') // returns 'users'
+ * ```typescript
+ * pluralize('user')     // returns 'users'
+ * pluralize('users')    // returns 'users'
  * pluralize('category') // returns 'categories'
+ * pluralize('box')      // returns 'boxes'
+ * ```
  */
 function pluralize(str: string): string {
   if (!str) return str;
@@ -27,17 +32,31 @@ function pluralize(str: string): string {
 }
 
 /**
- * Extracts primitive properties from an object
+ * Extracts primitive properties from an object, excluding methods and complex objects.
+ * Used internally to prepare data for Firestore storage.
+ *
+ * @template T - The type of the input object
  * @param obj - The object to extract properties from
- * @returns An object containing only primitive properties
+ * @returns An object containing only primitive properties (string, number, boolean, null, undefined, Date)
+ *
  * @example
+ * ```typescript
  * const user = {
  *   name: 'John',
  *   age: 30,
  *   address: { city: 'New York' },
- *   sayHello: () => 'Hello'
+ *   sayHello: () => 'Hello',
+ *   createdAt: new Date()
  * };
- * getPrimitiveProps(user) // returns { name: 'John', age: 30 }
+ *
+ * getPrimitiveProps(user)
+ * returns:
+ *  {
+ *    name: 'John',
+ *    age: 30,
+ *    createdAt: Date
+ *  }
+ * ```
  */
 function getPrimitiveProps<T extends object>(obj: T): Partial<T> {
   const result: Partial<T> = {};

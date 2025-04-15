@@ -1,5 +1,5 @@
-import FirePlus from "./core/Fireplus";
 import { Schema } from "./core/decorators/Schema";
+import FirePlus from "./core/Fireplus";
 
-export { FirePlus, Schema };
+export { Schema, FirePlus };
 export default FirePlus;

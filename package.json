@@ -18,7 +18,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup index.ts --dts --format esm,cjs --clean",
+    "build": "tsup src/index.ts --dts --format esm,cjs --clean",
     "test": "jest",
     "prepare": "npm run build"
   },

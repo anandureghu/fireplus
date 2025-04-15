@@ -1,0 +1,32 @@
+# Source
+*.ts
+!*.d.ts
+tsconfig.json
+
+# Tests
+tests/
+jest.config.js
+coverage/
+
+# Development
+.github/
+.vscode/
+.idea/
+.DS_Store
+*.log
+credentials/
+
+# Git
+.git/
+.gitignore
+
+# CI
+.travis.yml
+.circleci/
+.github/
+
+# Misc
+node_modules/
+examples/
+docs/
+*.tgz 

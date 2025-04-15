@@ -1,6 +1,6 @@
 {
   "name": "fireplus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight ORM library for Firebase Firestore to simplify CRUD operations.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
